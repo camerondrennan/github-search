@@ -1,21 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import { fade } from '@material-ui/core/styles/colorManipulator';
-import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
+import React from "react";
+import PropTypes from "prop-types";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import InputBase from "@material-ui/core/InputBase";
+import {fade} from "@material-ui/core/styles/colorManipulator";
+import {withStyles} from "@material-ui/core/styles";
+import SearchIcon from "@material-ui/icons/Search";
+import Button from "@material-ui/core/Button"
 
 const styles = theme => ({
     root: {
@@ -70,7 +62,7 @@ const styles = theme => ({
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('md')]: {
-            width: 200
+            width: 500
         }
     },
     sectionDesktop: {
@@ -88,89 +80,23 @@ const styles = theme => ({
 });
 
 class PrimarySearchAppBar extends React.Component {
-    state = {
-        anchorEl: null,
-        mobileMoreAnchorEl: null
-    };
+    onSearch(event) {
+        this.props.searching(event.target.value);
+    }
 
-    handleProfileMenuOpen = event => {
-        this.setState({ anchorEl: event.currentTarget });
-    };
-
-    handleMenuClose = () => {
-        this.setState({ anchorEl: null });
-        this.handleMobileMenuClose();
-    };
-
-    handleMobileMenuOpen = event => {
-        this.setState({ mobileMoreAnchorEl: event.currentTarget });
-    };
-
-    handleMobileMenuClose = () => {
-        this.setState({ mobileMoreAnchorEl: null });
-    };
+    searchNow() {
+        this.props.searchingNow();
+    }
 
     render() {
-        const { anchorEl, mobileMoreAnchorEl } = this.state;
         const { classes } = this.props;
-        const isMenuOpen = Boolean(anchorEl);
-        const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-        const renderMenu = (
-            <Menu
-                anchorEl={anchorEl}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                open={isMenuOpen}
-                onClose={this.handleMenuClose}
-            >
-                <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                <MenuItem onClick={this.handleClose}>My account</MenuItem>
-            </Menu>
-        );
-
-        const renderMobileMenu = (
-            <Menu
-                anchorEl={mobileMoreAnchorEl}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                open={isMobileMenuOpen}
-                onClose={this.handleMobileMenuClose}
-            >
-                <MenuItem>
-                    <IconButton color="inherit">
-                        <Badge className={classes.margin} badgeContent={4} color="secondary">
-                            <MailIcon />
-                        </Badge>
-                    </IconButton>
-                    <p>Messages</p>
-                </MenuItem>
-                <MenuItem>
-                    <IconButton color="inherit">
-                        <Badge className={classes.margin} badgeContent={11} color="secondary">
-                            <NotificationsIcon />
-                        </Badge>
-                    </IconButton>
-                    <p>Notifications</p>
-                </MenuItem>
-                <MenuItem onClick={this.handleProfileMenuOpen}>
-                    <IconButton color="inherit">
-                        <AccountCircle />
-                    </IconButton>
-                    <p>Profile</p>
-                </MenuItem>
-            </Menu>
-        );
 
         return (
             <div className={classes.root}>
                 <AppBar position="static">
                     <Toolbar>
-                        <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-                            <MenuIcon />
-                        </IconButton>
                         <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-                            Material-UI
+                            Github Search
                         </Typography>
                         <div className={classes.search}>
                             <div className={classes.searchIcon}>
@@ -179,41 +105,18 @@ class PrimarySearchAppBar extends React.Component {
                             <InputBase
                                 placeholder="Search…"
                                 classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
+                                  root: classes.inputRoot,
+                                  input: classes.inputInput
+                                }}
+                                name="search"
+                                onChange={this.onSearch.bind(this)}
                             />
                         </div>
-                        <div className={classes.grow} />
-                        <div className={classes.sectionDesktop}>
-                            <IconButton color="inherit">
-                                <Badge className={classes.margin} badgeContent={4} color="secondary">
-                                    <MailIcon />
-                                </Badge>
-                            </IconButton>
-                            <IconButton color="inherit">
-                                <Badge className={classes.margin} badgeContent={17} color="secondary">
-                                    <NotificationsIcon />
-                                </Badge>
-                            </IconButton>
-                            <IconButton
-                                aria-owns={isMenuOpen ? 'material-appbar' : null}
-                                aria-haspopup="true"
-                                onClick={this.handleProfileMenuOpen}
-                                color="inherit"
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                        </div>
-                        <div className={classes.sectionMobile}>
-                            <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
-                                <MoreIcon />
-                            </IconButton>
-                        </div>
+                        <Button variant="contained" color="secondary" onClick={this.searchNow.bind(this)}>
+                            Search
+                        </Button>
                     </Toolbar>
                 </AppBar>
-                {renderMenu}
-                {renderMobileMenu}
             </div>
         );
     }

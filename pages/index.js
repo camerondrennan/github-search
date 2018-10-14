@@ -1,13 +1,15 @@
 import React from "react";
-import AppBar from '../components/AppBar';
-import Link from 'next/link'
-import fetch from 'isomorphic-unfetch'
+import AppBar from "../components/AppBar";
+import Card from "../components/Card";
+import Results from "../components/Results";
+import fetch from "isomorphic-unfetch";
 
 class Index extends React.Component {
     constructor(props) {
         super();
         this.state = {
             search: '',
+            count: 0,
             items: []
         };
     }
@@ -29,8 +31,11 @@ class Index extends React.Component {
             .then(res => res.json())
             .then(data => {
                 this.setState({
+                    count: data.total_count,
                     items: data.items
                 });
+
+                console.log(data);
             });
     }
 
@@ -39,13 +44,10 @@ class Index extends React.Component {
         return (
             <div>
                 <AppBar searching={this.onSearch.bind(this)} searchingNow={this.searchNow.bind(this)}/>
-                <ul>
-                    {this.state.items.map((item) => (
-                        <li>
-                            <a>{item.name}</a>
-                        </li>
-                    ))}
-                </ul>
+                <Results count={this.state.count}/>
+                {this.state.items.map((item) => (
+                    <Card cardData={item}/>
+                ))}
             </div>
         )
     }
