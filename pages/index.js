@@ -1,15 +1,54 @@
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Star from '@material-ui/icons/Star';
+import React from "react";
 import AppBar from '../components/AppBar';
+import Link from 'next/link'
+import fetch from 'isomorphic-unfetch'
 
-export default (props) => (
-    <div>
-        <AppBar />
-        <div>Hello World</div>
-        <Grid item xs={8}>
-            <Star className={props.icon} color="primary"/>
-        </Grid>
-        <Button variant="contained" color="primary">Danger!</Button>
-    </div>
-)
+class Index extends React.Component {
+    constructor(props) {
+        super();
+        this.state = {
+            search: '',
+            items: []
+        };
+    }
+
+    static getInitialProps = function() {
+        return {
+            items: []
+        }
+    };
+
+    onSearch(searchedTerm) {
+        this.setState({
+            search : searchedTerm
+        });
+
+        fetch(`https://api.github.com/search/repositories?q=${this.state.search}+language:assembly&sort=stars&order=desc`)
+            .then(res => res.json())
+            .then(data => {
+                if(data.items) {
+                    this.state.items = data.items;
+                }
+                console.log("search results:");
+                console.log(data);
+            });
+    }
+
+    render() {
+
+        return (
+            <div>
+                <AppBar searching={this.onSearch.bind(this)}/>
+                <ul>
+                    {this.state.items.map((item) => (
+                        <li>
+                            <a>{item.name}</a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        )
+    }
+}
+
+export default Index
