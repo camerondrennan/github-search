@@ -22,15 +22,15 @@ class Index extends React.Component {
         this.setState({
             search : searchedTerm
         });
+    }
 
-        fetch(`https://api.github.com/search/repositories?q=${this.state.search}+language:assembly&sort=stars&order=desc`)
+    searchNow() {
+        fetch(`https://api.github.com/search/repositories?q=${this.state.search}`)
             .then(res => res.json())
             .then(data => {
-                if(data.items) {
-                    this.state.items = data.items;
-                }
-                console.log("search results:");
-                console.log(data);
+                this.setState({
+                    items: data.items
+                });
             });
     }
 
@@ -38,7 +38,7 @@ class Index extends React.Component {
 
         return (
             <div>
-                <AppBar searching={this.onSearch.bind(this)}/>
+                <AppBar searching={this.onSearch.bind(this)} searchingNow={this.searchNow.bind(this)}/>
                 <ul>
                     {this.state.items.map((item) => (
                         <li>
