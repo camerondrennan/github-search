@@ -46,7 +46,7 @@ class Index extends React.Component {
                 <AppBar searching={this.onSearch.bind(this)} searchingNow={this.searchNow.bind(this)}/>
                 <Results count={this.state.count}/>
                 {this.state.items.map((item) => (
-                    <Card cardData={item}/>
+                    <Card key={item.id} cardData={item}/>
                 ))}
             </div>
         )
