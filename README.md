@@ -1,6 +1,6 @@
 # github-search
 Node.js website allowing users to search Github repositories using the Github Search API. The application was built
-using Next.js which is a lightweight framework for React.js applications and it runs on the Node.js runtime environement
+using Next.js which is a lightweight framework for React.js applications and it runs on the Node.js runtime environment
 with an express server to serve the application.
 
 ## Getting Started
@@ -64,3 +64,21 @@ Install [now](https://zeit.co/now#get-started) and run command from base reposit
 cd <github-search_BASE_DIR>
 now
 ```
+
+## Built With
+
+* [Next.js](https://nextjs.org/) - The React.js framework used
+* [React.js](https://reactjs.org/) - Front end javascript framework
+* [Node.js](https://nodejs.org/en/) - Back end runtime environment
+* [Express.js](https://expressjs.com/) - Used to serve application
+* [Material UI](https://material-ui.com/) - The React.js UI framework used
+* [Yarn](https://yarnpkg.com/en/) - Used for dependency management
+* [Jest](https://jestjs.io/) - Testing framework used
+
+## Authors
+
+* **Cameron Drennan**
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
