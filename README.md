@@ -84,6 +84,17 @@ yarn install
 yarn run test
 ```
 
+## Given more time I would have like too...
+
+Firstly I loved working on this project as I got to learn so many new technologies (so it was quite addictive). Every single piece of the project
+was new to me and it did come with many teething problems. I loved the challenge of implementing the solution in a new
+tech stack which in itself is a risk but I hope that my ambition and willingness to learn and take on new things has
+shone through. I would however have liked to have done some testing
+around my implementation. I also would have liked to add a sort by option such as sort by number of stars. It would have
+been nice to also add a Travis CI to build my code and deploy it to now on every commit. I would like to learn how to
+apply redux to my React project for managing state across components as this was something I was stuck on for a
+considerable length of time.
+
 ## Built With
 
 * [Next.js](https://nextjs.org/) - The React.js framework used
