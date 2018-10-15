@@ -62,7 +62,7 @@ const styles = theme => ({
         transition: theme.transitions.create('width'),
         width: '100%',
         [theme.breakpoints.up('md')]: {
-            width: 500
+            width: 200
         }
     },
     sectionDesktop: {

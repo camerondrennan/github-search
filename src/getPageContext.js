@@ -6,10 +6,16 @@ import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
 
 // A theme with custom primary and secondary color.
-// It's optional
+// It's optional.
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true
+  }
+});
 
 function createPageContext() {
   return {
+    theme,
     // This is needed in order to deduplicate the injection of CSS in the page.
     sheetsManager: new Map(),
     // This is needed in order to inject the critical CSS.
