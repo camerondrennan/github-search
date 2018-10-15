@@ -48,6 +48,14 @@ yarn run build
 
 ### Running Production App
 
+If running on windows please change the following in package.json
+
+```
+"scripts": {
+    "start": "SET NODE_ENV=production & node server.js"
+}
+```
+
 ```bash
 cd <github-search_BASE_DIR>
 yarn install
@@ -63,6 +71,17 @@ Install [now](https://zeit.co/now#get-started) and run command from base reposit
 ```bash
 cd <github-search_BASE_DIR>
 now
+```
+
+## Running the tests
+
+I chose jest as my testing framework but I could not get the tests running. This is a new technology to me which I am
+keen to learn more about. I hope to get the opportunity to receive some guidance on this.
+
+```bash
+cd <github-search_BASE_DIR>
+yarn install
+yarn run test
 ```
 
 ## Built With
