@@ -7,6 +7,8 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from 'next/link';
+import CodeIcon from "@material-ui/icons/Code";
+import StarRateIcon from "@material-ui/icons/StarRate";
 
 const styles = {
     card: {
@@ -24,6 +26,11 @@ const styles = {
     pos: {
         marginBottom: 12,
     },
+    materialIcons: {
+        display: 'inline-flex',
+        verticalAlign: 'middle',
+        marginTop: -3
+    }
 };
 
 class SimpleCard extends React.Component {
@@ -42,10 +49,11 @@ class SimpleCard extends React.Component {
                     <Typography className={classes.pos} color="textSecondary">
                         {this.props.cardData.description}
                     </Typography>
-                    <Typography component="p">
-                        {this.props.cardData.language}
-                        <br/>
-                        {this.props.cardData.stargazers_count}
+                    <Typography color="textSecondary">
+                        <CodeIcon className={classes.materialIcons} /> {this.props.cardData.language}
+                    </Typography>
+                    <Typography color="textSecondary">
+                        <StarRateIcon className={classes.materialIcons}/> {this.props.cardData.stargazers_count}
                     </Typography>
                 </CardContent>
             </Card>

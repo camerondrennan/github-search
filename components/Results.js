@@ -17,14 +17,22 @@ const styles = {
 class Results extends React.Component {
     render() {
         const { classes } = this.props;
+        const count = this.props.count;
         
         return (
             <div>
-                <Typography className={classes.results} variant="h6" color="inherit" noWrap>
-                    Repositories Returned: {this.props.count}
-                </Typography>
-                <Divider />
+            {count > 0 ? (
+                <div>
+                    <Typography className={classes.results} variant="h6" color="inherit" noWrap>
+                        Repositories Returned: {this.props.count}
+                    </Typography>
+                    <Divider />
+                </div>
+            ) : (
+                <div></div>
+            )}
             </div>
+
         );
     }
 }
